@@ -47,56 +47,6 @@ const Translate = {
 		Translate.currentLang = normalizeLangCode(browserLang)
 
 		switch (Translate.currentLang) {
-			case 'de':
-				Translate.strings = await import(/* webpackPreload: true */ '~assets/languages/de.json');
-				break;
-			case 'es':
-				Translate.strings = await import(/* webpackPreload: true */ '~assets/languages/es.json');
-				break;
-			// case 'fi':
-			// 	Translate.strings = await import(/* webpackPreload: true */ '~assets/languages/fi.json');
-			// 	break;
-			case 'fr':
-				Translate.strings = await import(/* webpackPreload: true */ '~assets/languages/fr.json');
-				break;
-			case 'hi':
-				Translate.strings = await import(/* webpackPreload: true */ '~assets/languages/hi.json');
-				break;
-			case 'it':
-				Translate.strings = await import(/* webpackPreload: true */ '~assets/languages/it.json');
-				break;
-			case 'ja':
-				Translate.strings = await import(/* webpackPreload: true */ '~assets/languages/ja.json');
-				break;
-			case 'ko':
-				Translate.strings = await import(/* webpackPreload: true */ '~assets/languages/ko.json');
-				break;
-			case 'nl':
-				Translate.strings = await import(/* webpackPreload: true */ '~assets/languages/nl.json');
-				break;
-			case 'pl':
-				Translate.strings = await import(/* webpackPreload: true */ '~assets/languages/pl.json');
-				break;
-			case 'pt':
-				Translate.strings = await import(/* webpackPreload: true */ '~assets/languages/pt_BR.json');
-				Translate.currentLang = 'pt_BR'
-				break;
-			case 'ru':
-				Translate.strings = await import(/* webpackPreload: true */ '~assets/languages/ru.json');
-				break;
-			case 'sv':
-				Translate.strings = await import(/* webpackPreload: true */ '~assets/languages/sv.json');
-				break;
-			case 'tr':
-				Translate.strings = await import(/* webpackPreload: true */ '~assets/languages/tr.json');
-				break;
-			case 'zh-Hans':
-				Translate.strings = await import(/* webpackPreload: true */ '~assets/languages/zh-Hans.json');
-				break;
-			case 'zh-Hant':
-				Translate.strings = await import(/* webpackPreload: true */ '~assets/languages/zh-Hant.json');
-				break;
-
 			//Reset to default
 			default:
 				Translate.currentLang = 'en'

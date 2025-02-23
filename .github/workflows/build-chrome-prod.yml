@@ -1,0 +1,38 @@
+name: Build Chrome Extension
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: "recursive"
+
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Make version.sh for xcode project executable
+        run: chmod +x build/xcode/Save\ to\ Raindrop.io/version.sh
+
+      - name: Build chrome extension
+        run: npm run build:extension:chrome
+
+      - name: Read package json
+        id: json
+        uses: zoexx/github-action-json-file-properties@release
+        with:
+          file_path: "package.json"
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: built-extension-${{ steps.json.outputs.version }}
+          path: dist/*.zip

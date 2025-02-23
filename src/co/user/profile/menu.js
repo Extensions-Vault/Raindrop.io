@@ -21,28 +21,6 @@ function UserProfileMenu({
     return (
         <Popover pin={pin} onClose={onClose}>
             <Menu>
-                <MenuItem to={`/settings?back=${encodeURIComponent(location.pathname + location.search)}`}>
-                    <Icon name='settings' />
-                    {t.s('settings')}
-                </MenuItem>
-
-                <MenuSeparator />
-
-                {target != 'extension' && (
-                    <MenuItem href={config.links.download} target='_blank'>
-                        <Icon name='extension' />
-                        {t.s('browserExtension')}
-                    </MenuItem>
-                )}
-
-                {!environment.includes('safari') && (
-                    <MenuItem href={config.links.download} target='_blank'>
-                        <Icon name='install' />
-                        {t.s('download')} {t.s('app').toLowerCase()}
-                    </MenuItem>
-                )}
-
-                <MenuSeparator />
 
                 <MenuItem href={config.links.help.index} target='_blank'>
                     <Icon name='help' />
@@ -57,11 +35,6 @@ function UserProfileMenu({
                 <MenuItem href={config.links.better} target='_blank'>
                     <Icon name='like' />
                     {t.s('pro_nextFeatures')}
-                </MenuItem>
-
-                <MenuItem href={config.links.twitter} target='_blank'>
-                    <Icon name='twitter_outline' />
-                    Twitter
                 </MenuItem>
 
                 <MenuSeparator />

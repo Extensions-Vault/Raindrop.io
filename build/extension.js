@@ -3,17 +3,15 @@ const webpack = require('webpack')
 const { merge } = require('webpack-merge')
 const common = require('./common')
 
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CopyPlugin = require('copy-webpack-plugin')
 const ZipPlugin = require('zip-webpack-plugin')
 
 module.exports = (env={}, args={}) => {
     const outputPath = path.resolve(__dirname, '..', 'dist', env.vendor, env.production?'prod':'dev')
 
     env.filename = '[name]'
-    
+
     switch(env.vendor) {
-        case 'chrome': env.sentry = { urlPrefix: 'chrome-extension://ldgfbffkinooeloadekpmfoklnobpien/' }; break
+        case 'chrome': env.sentry = { disabled: true }; break //ignored sentry for chrome
         case 'edge': env.sentry = { urlPrefix: 'chrome-extension://lpngnnjemnkjmgpoolldhiejhkmmgfge/' }; break
         case 'firefox': env.sentry = { disabled: true }; break //ignored, because reviewers complain
         case 'opera': env.sentry = { urlPrefix: 'chrome-extension://omkjjddnkfagilfgmbmeeffkljlpaglj/' }; break
@@ -53,24 +51,10 @@ module.exports = (env={}, args={}) => {
             },
 
             plugins: [
-                new HtmlWebpackPlugin({
-                    title: 'Raindrop.io',
-                    template: './index.ejs',
-                    filename: 'sidepanel.html',
-                    scriptLoading: 'blocking',
-                    inject: 'body',
-                    excludeChunks: ['manifest', 'background']
-                }),
 
                 new webpack.DefinePlugin({
                     'process.env.APP_TARGET': JSON.stringify('extension'),
                     'process.env.EXTENSION_VENDOR': JSON.stringify(env.vendor)
-                }),
-
-                new CopyPlugin({
-                    patterns: [
-                        { from: 'assets/target/extension/welcome', to: 'welcome' }
-                    ]
                 }),
 
                 ...(env.production ? [

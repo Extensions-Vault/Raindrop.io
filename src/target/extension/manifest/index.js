@@ -57,11 +57,11 @@ module.exports = ({ vendor, production=false }, l) => {
 		),
 
 		action: {
-			default_popup: vendor=='safari' ? 
+			default_popup: vendor=='safari' ?
 				[
 					file(l, '../../../assets/target/extension/action_in_iframe.html'),
 					file(l, '../../../assets/target/extension/action_in_iframe.js'),
-				][0] : 
+				][0] :
 				'index.html?action',
 			default_icon: {
 				//chrome based icon
@@ -92,11 +92,9 @@ module.exports = ({ vendor, production=false }, l) => {
 			'contextMenus',
 			'activeTab',
 			'scripting',
-			'storage',
-			...(vendor == 'chrome' || vendor == 'edge' ? ['sidePanel'] : []),
-			...(vendor == 'safari-ios' ? ['tabs'] : [])
+			'storage'
 		],
-		
+
 		optional_permissions: [
 			...(vendor != 'safari-ios' ? ['tabs'] : []),
 		],
@@ -137,51 +135,7 @@ module.exports = ({ vendor, production=false }, l) => {
 				},
 				description: '__MSG_savePageOrHighlight__'
 			},
-			
-			open_raindrop_web: {
-				description: '__MSG_openRaindrop__'
-			},
-
-			...(vendor == 'chrome' || vendor == 'edge' ? {
-				execute_side_panel: {
-					suggested_key: {
-						default: 'Ctrl+Period'
-					},
-					description: '__MSG_openSidePanel__'
-				}
-			}: {}),
-
-			...(vendor == 'firefox' || vendor == 'opera' ? {
-				_execute_sidebar_action: {
-					suggested_key: {
-						default: 'Ctrl+Period'
-					},
-					description: '__MSG_openSidePanel__'
-				}
-			}: {}),
 		},
-
-		//sidebar
-		...(vendor == 'chrome' || vendor == 'edge' ? {
-			side_panel: {
-				default_path: 'sidepanel.html'
-			}
-		} : {}),
-
-		...(vendor == 'firefox' || vendor == 'opera' ? {
-			sidebar_action: {
-				default_panel: 'sidepanel.html',
-				default_icon: {
-					16: file(l, '../../../assets/target/extension/action_firefox_light_16.png'),
-					24: file(l, '../../../assets/target/extension/action_firefox_light_24.png'),
-					32: file(l, '../../../assets/target/extension/action_firefox_light_32.png')
-				},
-				...(vendor == 'firefox' ? {
-					browser_style: false,
-					open_at_install: false
-				} : {})
-			}
-		}: {})
 	}
 
 	return { code: JSON.stringify(json, null, 2) };

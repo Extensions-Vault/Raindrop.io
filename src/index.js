@@ -3,7 +3,6 @@ import './wdyr'
 import React from 'react'
 import { render } from 'react-dom'
 import { target, environment } from '~target'
-import Sentry from '~modules/vendors/sentry'
 
 //polyfills
 import 'form-request-submit-polyfill'
@@ -15,7 +14,6 @@ import { PersistGate } from 'redux-persist/es/integration/react'
 import { withLocalReducer } from '~data'
 import localReducers from './local/reducers'
 
-import ServiceWorker from '~modules/sw/component'
 import Translate from '~modules/translate/component'
 import Routes from '~routes'
 import Document from './routes/_document'
@@ -28,9 +26,7 @@ const { store, persistor } = withLocalReducer(localReducers)
 //render app
 render(
 	//!add other global components in co/screen/basic
-	<Sentry>
 		<Document>
-			<ServiceWorker>
 				<Provider store={store}>
 					<PersistGate loading={<Splash />} persistor={persistor}>
 						<Translate loading={<Splash />}>
@@ -40,10 +36,8 @@ render(
 						</Translate>
 					</PersistGate>
 				</Provider>
-			</ServiceWorker>
-		</Document>
-	</Sentry>,
-	
+		</Document>,
+
 	document.getElementById('react')
 )
 

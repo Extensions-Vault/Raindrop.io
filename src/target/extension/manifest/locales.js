@@ -27,6 +27,8 @@ module.exports = ({ emitFile })=>{
     ).map(([lang])=>lang)
 
     for(const lang of languages){
+        if (lang !== 'en') continue; // Filter to process only 'en'
+
         emitFile(`_locales/${overrideLangCode[lang] || lang}/messages.json`, JSON.stringify(
             {
                 appDesc: {
